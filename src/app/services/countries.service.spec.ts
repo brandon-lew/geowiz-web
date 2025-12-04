@@ -27,7 +27,8 @@ describe('CountriesService', () => {
       ],
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    countriesService = new CountriesService(httpClientSpy);
+    TestBed.overrideProvider(HttpClient, { useValue: httpClientSpy });
+    countriesService = TestBed.inject(CountriesService);
   });
 
   it('should create', () => {
@@ -57,7 +58,6 @@ describe('CountriesService', () => {
     ];
 
     httpClientSpy.get.and.returnValue(of(expectedCountries));
-
     countriesService.getCountries().subscribe({
       next: (data) => {
         expect(data)

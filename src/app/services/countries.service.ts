@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -10,10 +10,10 @@ import { ICountry } from '../interfaces/country.model';
   providedIn: 'root',
 })
 export class CountriesService {
+  private http = inject(HttpClient);
+
   // DEFINE PRIVATE DATA LOCATION
   private dataUrl = 'assets/data/countries.json';
-
-  constructor(private http: HttpClient) {}
 
   // PRIVATE HTTP ERROR HANDLING METHOD
   private handleError(err: HttpErrorResponse): Observable<never> {

@@ -1,9 +1,11 @@
 <!-- Window Overlay -->
-<div *ngIf="isOverlay" class="window-overlay">
-  <div class="window-overlay__content">
-    <h2 class="text-center">{{ response }}</h2>
+@if (isOverlay) {
+  <div class="window-overlay">
+    <div class="window-overlay__content">
+      <h2 class="text-center">{{ response }}</h2>
+    </div>
   </div>
-</div>
+}
 <!-- Main Section -->
 <main class="container">
   <!-- Header -->
@@ -14,113 +16,123 @@
           src="assets/images/geowiz_logo.svg"
           alt="geowiz logo - drawn outline of earth"
           class="me-2 header__img"
-        />
-        <span class="text--primary">Geo</span
-        ><span class="text--secondary">Wiz</span>
-      </h1>
-    </div>
-  </div>
-  <!-- Questions -->
-  <div *ngIf="isDisplayQuestion">
-    <!-- Capital -->
-    <div *ngIf="isActiveCapital" class="row questions">
-      <div class="col-12">
-        <p class="text-center">Capital: {{ questionCapital }}</p>
-      </div>
-    </div>
-    <!-- Flag and Shape -->
-    <div *ngIf="isActiveFlag || isActiveShape" class="row mb-3 questions">
-      <div
-        *ngIf="isActiveFlag"
-        [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
-      >
-        <div class="questions__flag text-center">{{ questionFlag }}</div>
-      </div>
-      <div
-        *ngIf="isActiveShape"
-        [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
-      >
-        <img
-          src="assets/images/countries/{{ questionId }}/vector.svg"
-          alt="country-shape"
-          class="questions__shape text-center"
-        />
-      </div>
-    </div>
-  </div>
-  <!-- List of Available Country Selections -->
-  <div class="row">
-    <div class="col-12">
-      <div class="list">
-        <div *ngFor="let country of countries" class="radio">
-          <input
-            id="{{ country.name.common }}"
-            class="radio__input"
-            name="list_of_countries"
-            type="radio"
-            value="{{ country.name.common }}"
-            (change)="onChange(country.name.common)"
           />
-          <label class="radio__label" for="{{ country.name.common }}">{{
-            country.name.common
-          }}</label>
+        <span class="text--primary">Geo</span
+          ><span class="text--secondary">Wiz</span>
+        </h1>
+      </div>
+    </div>
+    <!-- Questions -->
+    @if (isDisplayQuestion) {
+      <div>
+        <!-- Capital -->
+        @if (isActiveCapital) {
+          <div class="row questions">
+            <div class="col-12">
+              <p class="text-center">Capital: {{ questionCapital }}</p>
+            </div>
+          </div>
+        }
+        <!-- Flag and Shape -->
+        @if (isActiveFlag || isActiveShape) {
+          <div class="row mb-3 questions">
+            @if (isActiveFlag) {
+              <div
+                [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
+                >
+                <div class="questions__flag text-center">{{ questionFlag }}</div>
+              </div>
+            }
+            @if (isActiveShape) {
+              <div
+                [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
+                >
+                <img
+                  src="assets/images/countries/{{ questionId }}/vector.svg"
+                  alt="country-shape"
+                  class="questions__shape text-center"
+                  />
+              </div>
+            }
+          </div>
+        }
+      </div>
+    }
+    <!-- List of Available Country Selections -->
+    <div class="row">
+      <div class="col-12">
+        <div class="list">
+          @for (country of countries; track country) {
+            <div class="radio">
+              <input
+                id="{{ country.name.common }}"
+                class="radio__input"
+                name="list_of_countries"
+                type="radio"
+                value="{{ country.name.common }}"
+                (change)="onChange(country.name.common)"
+                />
+              <label class="radio__label" for="{{ country.name.common }}">{{
+                country.name.common
+              }}</label>
+            </div>
+          }
         </div>
       </div>
     </div>
-  </div>
-</main>
-<!-- Bottom Settings Bar -->
-<div class="navbar navbar-expand navbar--grey fixed-bottom">
-  <div class="container">
-    <ul class="nav navbar-nav nav-fill w-100">
-      <!-- Capital Toggle -->
-      <li class="nav-item">
-        <button class="nav-link" (click)="onToggle('capital')">
-          <i
-            class="fas"
+  </main>
+  <!-- Bottom Settings Bar -->
+  <div class="navbar navbar-expand navbar--grey fixed-bottom">
+    <div class="container">
+      <ul class="nav navbar-nav nav-fill w-100">
+        <!-- Capital Toggle -->
+        <li class="nav-item">
+          <button class="nav-link" (click)="onToggle('capital')">
+            <i
+              class="fas"
             [ngClass]="[
               isActiveCapital ? 'fa-toggle-on active' : 'fa-toggle-off'
             ]"
-          ></i
-          ><br />Capital
-        </button>
-      </li>
-      <!-- Flag Toggle -->
-      <li class="nav-item">
-        <button class="nav-link" (click)="onToggle('flag')">
-          <i
-            class="fas"
-            [ngClass]="[isActiveFlag ? 'fa-toggle-on active' : 'fa-toggle-off']"
-          ></i
-          ><br />Flag
-        </button>
-      </li>
-      <!-- Shape Toggle -->
-      <li class="nav-item">
-        <button class="nav-link" (click)="onToggle('shape')">
-          <i
-            class="fas"
+              ></i
+              ><br />Capital
+            </button>
+          </li>
+          <!-- Flag Toggle -->
+          <li class="nav-item">
+            <button class="nav-link" (click)="onToggle('flag')">
+              <i
+                class="fas"
+                [ngClass]="[isActiveFlag ? 'fa-toggle-on active' : 'fa-toggle-off']"
+                ></i
+                ><br />Flag
+              </button>
+            </li>
+            <!-- Shape Toggle -->
+            <li class="nav-item">
+              <button class="nav-link" (click)="onToggle('shape')">
+                <i
+                  class="fas"
             [ngClass]="[
               isActiveShape ? 'fa-toggle-on active' : 'fa-toggle-off'
             ]"
-          ></i
-          ><br />Shape
-        </button>
-      </li>
-      <!-- Hardcore Toggle -->
-      <li class="nav-item">
-        <button class="nav-link" (click)="onToggle('hardcore')">
-          <i
-            class="fas"
+                  ></i
+                  ><br />Shape
+                </button>
+              </li>
+              <!-- Hardcore Toggle -->
+              <li class="nav-item">
+                <button class="nav-link" (click)="onToggle('hardcore')">
+                  <i
+                    class="fas"
             [ngClass]="[
               isActiveHardcore ? 'fa-toggle-on active' : 'fa-toggle-off'
             ]"
-          ></i
-          ><br />Hardcore
-        </button>
-      </li>
-    </ul>
-  </div>
-</div>
+                    ></i
+                    ><br />Hardcore
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
 
-<router-outlet />
+          <router-outlet />

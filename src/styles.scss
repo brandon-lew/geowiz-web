@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Poppins:wght@300;400&display=swap");
-
 // PRESET VARIABLES
-@import "sass/presets";
+@use "sass/presets";
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Poppins:wght@300;400&display=swap");
 
 html,
 body {
@@ -10,23 +10,23 @@ body {
 }
 body {
   font-family: "Noto Sans", Arial, sans-serif;
-  color: $colorDarkGrey;
+  color: presets.$colorDarkGrey;
 }
 a {
-  color: $colorDarkGrey;
+  color: presets.$colorDarkGrey;
   &:hover {
-    color: $colorPrimary;
+    color: presets.$colorPrimary;
   }
 }
 .text--primary {
-  color: $colorPrimary;
+  color: presets.$colorPrimary;
 }
 .text--secondary {
-  color: $colorSecondary;
+  color: presets.$colorSecondary;
 }
 .text--tertiary {
-  color: $colorTertiary;
+  color: presets.$colorTertiary;
 }
 .text--red {
-  color: $colorRed;
+  color: presets.$colorRed;
 }

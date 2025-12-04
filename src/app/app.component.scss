@@ -1,5 +1,5 @@
 // PRESET VARIABLES
-@import "../sass/presets";
+@use "../sass/presets";
 
 // WINDOW OVERLAY
 .window-overlay {
@@ -83,8 +83,8 @@
     display: none;
   }
   .radio__label {
-    background-color: $colorPrimary;
-    border: 0.125rem solid $colorTertiary;
+    background-color: presets.$colorPrimary;
+    border: 0.125rem solid presets.$colorTertiary;
     border-radius: 0.25rem;
     color: white;
     margin-bottom: 0.5rem;
@@ -94,8 +94,8 @@
   }
   .radio__input:checked ~ .radio__label {
     background-color: white;
-    border-color: $colorTertiary;
-    color: $colorPrimary;
+    border-color: presets.$colorTertiary;
+    color: presets.$colorPrimary;
   }
 }
 
@@ -113,7 +113,7 @@
     .radio__label {
       &:hover {
         background-color: white;
-        color: $colorPrimary;
+        color: presets.$colorPrimary;
         cursor: pointer;
       }
     }
@@ -125,8 +125,8 @@
   height: 4rem;
   padding: 0;
   &.navbar--grey {
-    background-color: $colorLightGrey;
-    border-top: 0.0625rem solid $colorMediumGrey;
+    background-color: presets.$colorLightGrey;
+    border-top: 0.0625rem solid presets.$colorMediumGrey;
   }
   .container {
     padding-left: 1rem;
@@ -141,11 +141,11 @@
     font-size: 1.25rem;
   }
   .nav-link {
-    color: $colorDarkGrey;
+    color: presets.$colorDarkGrey;
     display: inline-block;
     font-size: 0.75rem;
     .active {
-      color: $colorSecondary;
+      color: presets.$colorSecondary;
     }
   }
 
@@ -153,9 +153,9 @@
   @media (hover: hover) {
     .nav-link {
       &:hover {
-        color: $colorTertiary;
+        color: presets.$colorTertiary;
         .active {
-          color: $colorTertiary;
+          color: presets.$colorTertiary;
         }
       }
     }

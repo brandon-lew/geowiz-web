@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -11,11 +11,13 @@ import { CountriesService } from './services/countries.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
+  imports: [CommonModule, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
+  private countriesService = inject(CountriesService);
+
   isOverlay = false;
   isDisplayQuestion = true;
   isActiveCapital = true;
@@ -29,8 +31,6 @@ export class AppComponent implements OnInit {
   questionId = 'us';
   answer!: string;
   response!: string;
-
-  constructor(private countriesService: CountriesService) {}
 
   ngOnInit(): void {
     this.generateQuiz();

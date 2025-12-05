@@ -1,9 +1,11 @@
 <!-- Window Overlay -->
-<div *ngIf="isOverlay" class="window-overlay">
+@if (isOverlay) {
+<div class="window-overlay">
   <div class="window-overlay__content">
     <h2 class="text-center">{{ response }}</h2>
   </div>
 </div>
+}
 <!-- Main Section -->
 <main class="container">
   <!-- Header -->
@@ -21,38 +23,42 @@
     </div>
   </div>
   <!-- Questions -->
-  <div *ngIf="isDisplayQuestion">
+  @if (isDisplayQuestion) {
+  <div>
     <!-- Capital -->
-    <div *ngIf="isActiveCapital" class="row questions">
+    @if (isActiveCapital) {
+    <div class="row questions">
       <div class="col-12">
         <p class="text-center">Capital: {{ questionCapital }}</p>
       </div>
     </div>
+    }
     <!-- Flag and Shape -->
-    <div *ngIf="isActiveFlag || isActiveShape" class="row mb-3 questions">
-      <div
-        *ngIf="isActiveFlag"
-        [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
-      >
+    @if (isActiveFlag || isActiveShape) {
+    <div class="row mb-3 questions">
+      @if (isActiveFlag) {
+      <div [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']">
         <div class="questions__flag text-center">{{ questionFlag }}</div>
       </div>
-      <div
-        *ngIf="isActiveShape"
-        [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']"
-      >
+      } @if (isActiveShape) {
+      <div [ngClass]="[isActiveFlag && isActiveShape ? 'col-6' : 'col-12']">
         <img
           src="assets/images/countries/{{ questionId }}/vector.svg"
           alt="country-shape"
           class="questions__shape text-center"
         />
       </div>
+      }
     </div>
+    }
   </div>
+  }
   <!-- List of Available Country Selections -->
   <div class="row">
     <div class="col-12">
       <div class="list">
-        <div *ngFor="let country of countries" class="radio">
+        @for (country of countries; track country.name.common) {
+        <div class="radio">
           <input
             id="{{ country.name.common }}"
             class="radio__input"
@@ -65,6 +71,7 @@
             country.name.common
           }}</label>
         </div>
+        }
       </div>
     </div>
   </div>

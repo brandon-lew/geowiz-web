@@ -6,7 +6,7 @@
     "build": "ng build --configuration production --base-href /portfolio/geowiz/",
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
-    "review": "npm run lint && npm run test:headless",
+    "review": "npm run lint && npm run test:headless && npm run build",
     "start": "ng serve",
     "test": "ng test",
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless"
